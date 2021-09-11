@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="FIles">
+      <UniqueIdentifier>{5708e1cc-8e9e-40fe-83b4-3ab92edd403b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Calculator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Softwares\AlterGen Studios\Calculator v3\Files\FactorySet.laam">
+      <Filter>FIles</Filter>
+    </None>
+    <None Include="..\..\..\..\Softwares\AlterGen Studios\Calculator v3\Files\IGFx.laam">
+      <Filter>FIles</Filter>
+    </None>
+    <None Include="..\..\..\..\Softwares\AlterGen Studios\Calculator v3\Files\Json.laam">
+      <Filter>FIles</Filter>
+    </None>
+    <None Include="..\..\..\..\Softwares\AlterGen Studios\Calculator v3\Files\Microsoft.NET.laam">
+      <Filter>FIles</Filter>
+    </None>
+    <None Include="..\..\..\..\Softwares\AlterGen Studios\Calculator v3\Files\oem2.PNF">
+      <Filter>FIles</Filter>
+    </None>
+    <None Include="..\..\..\..\Softwares\AlterGen Studios\Calculator v3\Files\PcLib.laam">
+      <Filter>FIles</Filter>
+    </None>
+    <None Include="..\..\..\..\Softwares\AlterGen Studios\Calculator v3\Files\PssT.laam">
+      <Filter>FIles</Filter>
+    </None>
+    <None Include="..\..\..\..\Softwares\AlterGen Studios\Calculator v3\Files\Rgx.laam">
+      <Filter>FIles</Filter>
+    </None>
+    <None Include="..\..\..\..\Softwares\AlterGen Studios\Calculator v3\Files\SystemRun.laam">
+      <Filter>FIles</Filter>
+    </None>
+  </ItemGroup>
+</Project>

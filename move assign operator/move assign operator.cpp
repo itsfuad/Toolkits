@@ -28,7 +28,7 @@ public:
 		other.m_data = nullptr;
 	}
 
-	String& operator=(String&& other)
+	String& operator=(String&& other) noexcept
 	{
 		printf("moved!\n");
 
