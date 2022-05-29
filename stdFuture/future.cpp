@@ -1,61 +1,35 @@
 #include <iostream>
+#include <thread>
+#include <future>
 
-#define log(x) std::cout << x ;
-#define MAX 50000
+#define log(x) std::cout << x << std::endl
 
-int multiply(int x, int res[], int res_size);
-uint64_t factorial2(int a)
+using namespace std::chrono_literals;
+
+void factorial(const int& value)
 {
-	uint64_t factorial = 1;
-	while (a)
+	int temp = value, res = 1;
+	while (temp > 0)
 	{
-		factorial *= a--;
+		res *= temp--;
 	}
-	return factorial;
+	log(res);
 }
 
-void factorial(int n)
+void set(int& value)
 {
-	int res[MAX];
-	res[0] = 1;
-	int res_size = 1;
-
-	for (int x = 2; x <= n; x++)
-	{
-		res_size = multiply(x, res, res_size);
-	}
-	for (int i = res_size - 1; i >= 0; i--)
-	{
-		log(res[i]);
-	}
-}
-
-int multiply(int x, int res[], int res_size)
-{
-	int carry = 0;
-	for (int i = 0; i < res_size; i++)
-	{
-		int prod = res[i] * x + carry;
-		res[i] = prod % 10;
-		carry = prod / 10;
-	}
-	while (carry)
-	{
-		res[res_size] = carry % 10;
-		carry = carry / 10;
-		res_size++;
-	}
-	return res_size;
+	std::this_thread::sleep_for(5s);
+	value = 5;
 }
 
 int main()
 {
-	int a = 0;
-	std::cout << "Enter number for factorial: ";
-	std::cin >> a;
-	//std::cout << "Normal Factorial: " << factorial2(a) << std::endl;
-	std::cout << "Extended Factorial: ";
-	factorial(a);
-	std::cout << std::endl;
-	main();
+	int value = 3;
+	std::thread t1(set, std::ref(value));
+	t1.join();
+	std::thread t2(factorial, std::ref(value));
+	t2.join();
+
+	std::promise<int> p;
+	std::future<int> fu = p.get_future();
 }

@@ -4,40 +4,49 @@
 #include <fstream>
 #include <filesystem>
 
+using namespace System::Collections::Generic;
+
+#define println(x) std::cout << x << std::endl
+#define print(x) std::cout << x
+
 namespace fs = std::filesystem;
 
 void unlock()
 {
 	std::string pwd;
-	std::cout << "Enter password to Unlock Your Secure Folder: ";
+	print("Enter password to Unlock Your Secure Folder: ");
 	std::getline(std::cin, pwd);
 	if (pwd == "laam") //Set your password
 	{
 		system("attrib -h -s \"Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}\"");
 		fs::rename("Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}", "Private");
-		std::cout << "Folder Unlocked!" << std::endl;
+		println("Folder Unlocked");
+	}
+	else
+	{
+		println("Incorrect password");
 	}
 }
 
-int main()
+void run()
 {
 	if (fs::exists("Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}"))
 	{
 		unlock();
 	}
-	if (!fs::exists("Private") && !fs::exists("Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}"))
+	else if (!fs::exists("Private") && !fs::exists("Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}"))
 	{
 		fs::create_directories("Private");
-		std::cout << "Private Folder Created Successfully" << std::endl;
+		println("Private folder created sucessfully");
 	}
 	else if (fs::exists("Private"))
 	{
-		std::cout << "Are you sure to lock this folder? (Y/N)" << std::endl;
+		println("Are you sure to lock this folder? (Y/N)");
 		char ch;
 		std::cin >> ch;
 		if (ch == 'Y' || ch == 'y')
 		{
-			std::cout << "Locked" << std::endl;
+			println("Locked");
 			fs::rename("Private", "Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}");
 			system("attrib +h +s \"Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}\"");
 		}
@@ -45,5 +54,11 @@ int main()
 	else {
 		unlock();
 	}
+}
+
+int main()
+{
+	run();
+	//System::Console::WriteLine("Hello .NET");
 	std::cin.get();
 }

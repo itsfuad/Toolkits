@@ -1,6 +1,9 @@
 #include <iostream>
 #include <cstdarg>
 #include <iomanip>
+#include <type_traits>
+#include <stdio.h>
+#include <string.h>
 
 #define log(x) std::cout << x << std::endl;
 
@@ -22,10 +25,28 @@ int printsum2(Args... args)
 	return (args + ...);
 }
 
-void print(const char* format)
-{
-	std::cout << format;
-}
+
+//void print(const char* format)
+//{
+//	std::cout << format;
+//}
+//
+//template <typename T, typename... Args>
+//void print(const char* format, T value, Args... args)
+//{
+//	for (; *format != '\0'; format++)
+//	{
+//		if (*format == '%')
+//		{
+//			std::cout << value;
+//			print(format + 1, args...);
+//			break;
+//		}
+//		else {
+//			std::cout << *format;
+//		}
+//	}
+//}
 
 template <typename T, typename... Args>
 void print(const char* format, T value, Args... args)
@@ -35,7 +56,7 @@ void print(const char* format, T value, Args... args)
 		if (*format == '%')
 		{
 			std::cout << value;
-			print(format + 1, args...);
+			(print(format + 1, args),...);
 			break;
 		}
 		else {
@@ -44,10 +65,38 @@ void print(const char* format, T value, Args... args)
 	}
 }
 
+
+
+
+
+void printfu(const char* format, ... ) 
+{
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			//std::cout << *(format+1) << std::endl;
+			va_list list;
+			va_start(list, format);
+			switch (*(++format))
+			{
+			case 'd':
+				std::cout << va_arg(list, int);
+				break;
+			case 'c':
+				putchar(va_arg(list,char));
+				break;
+			}
+			*format++;
+		}
+		putchar(*format);
+		format++;
+	}
+}
+
 int main()
 {
-	std::string s = "HelloWorld";
-	log(printsum(3, 1, 2, 3));
-	log(printsum2(1, 2, 3));
-	print("Hello %, Fuad. Your id is: %\n", "world", 56564);
+	//std::cout << "Hello World!" << std::endl;
+	//printfu("Hello %d\n", 4);
+	print("Hello %", "Fuad");
 }
